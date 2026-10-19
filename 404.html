@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Cerita Hari Ini</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+
+    <style>
+        body { background: #f8fafc; color: #1e293b; font-family: 'Inter', sans-serif; }
+        .active-tab { background-color: #2563eb !important; color: white !important; border-color: #2563eb !important; }
+        .category-pill { background-color: #ffffff; color: #64748b; padding: 6px 16px; border-radius: 999px; font-weight: 600; font-size: 13px; white-space: nowrap; cursor: pointer; border: 1px solid #e2e8f0; transition: all 0.2s; }
+        .category-pill:hover { border-color: #2563eb; color: #2563eb; }
+        
+        .video-wrapper { background: #000; width: 100%; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(37, 99, 235, 0.15); border: 4px solid white; }
+        
+        /* Sticky Desktop Only */
+        @media (min-width: 1024px) { 
+            .sticky-video-desktop { position: -webkit-sticky; position: sticky; top: 80px; z-index: 40; }
+            .video-wrapper { aspect-ratio: 16/9; }
+        }
+        @media (max-width: 1023px) {
+            .video-wrapper { aspect-ratio: 9/16; max-height: 550px; }
+        }
+
+        .ad-banner-header { width: 100%; max-width: 728px; height: 90px; background: #ffffff; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
+        @media (max-width: 768px) { .ad-banner-header { max-width: 320px; height: 50px; } }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navbar -->
+    <nav class="bg-white/80 border-b border-blue-50 sticky top-0 z-[100] backdrop-blur-lg">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-6">
+                <h1 onclick="adClick()" class="text-2xl font-black italic text-blue-600 tracking-tighter cursor-pointer">NEXTTV</h1>
+                <!-- Category Menu -->
+                <div class="hidden lg:flex gap-3">
+                    <div onclick="adClick()" class="category-pill active-tab">Latest</div>
+                    <div onclick="adClick()" class="category-pill">Viral</div>
+                    <div onclick="adClick()" class="category-pill">Trending</div>
+                </div>
+            </div>
+            <!-- Search & Profile Icons -->
+            <div class="flex gap-5 text-slate-400">
+                <i onclick="adClick()" class="fas fa-search text-xl cursor-pointer hover:text-blue-600 transition"></i>
+                <i onclick="adClick()" class="far fa-user-circle text-xl cursor-pointer hover:text-blue-600 transition"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ad Banner -->
+    <div class="container mx-auto px-4 mt-4">
+        <div class="ad-banner-header">
+
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-4">
+        <div class="flex flex-col lg:flex-row gap-8 items-start">
+            
+            <!-- Player Section -->
+            <div class="w-full lg:w-2/3 sticky-video-desktop">
+                <div class="video-wrapper">
+                    <video id="main-player" class="w-full h-full" controls poster="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_thumb">
+                        <source id="video-source" src="" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="mt-6 bg-white p-6 rounded-[2rem] shadow-xl shadow-blue-50 border border-white">
+                    <h2 id="video-title" class="text-xl md:text-2xl font-bold leading-tight text-slate-800 line-clamp-2">Loading Video...</h2>
+                    
+                    <div class="flex items-center justify-between mt-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
+                                <i class="fas fa-play text-xs ml-0.5"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-800">FREE VIDEY</p>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                                    <span class="text-blue-600 font-black">● LIVE</span> • <span id="v-views">0</span> VIEWS
+                                </p>
+                            </div>
+                        </div>
+                        <button onclick="adClick()" class="bg-blue-600 text-white px-8 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">FOLLOW</button>
+                    </div>
+
+                    <!-- Download & Share -->
+                    <div class="flex gap-3 mt-8">
+                        <button onclick="adClick()" class="flex-1 bg-slate-50 hover:bg-blue-50 py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 border border-slate-100 transition-all text-slate-700">
+                            <i class="fas fa-download text-blue-600"></i> DOWNLOAD HD
+                        </button>
+                        <button onclick="adClick()" class="flex-1 bg-slate-50 hover:bg-blue-50 py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 border border-slate-100 transition-all text-slate-700">
+                            <i class="fas fa-share text-blue-400"></i> SHARE
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Posts -->
+            <div class="w-full lg:w-1/3">
+                <div class="flex items-center gap-2 mb-6 px-1">
+                    <div class="w-1.5 h-5 bg-blue-600 rounded-full"></div>
+                    <h3 class="font-bold text-slate-800 uppercase tracking-widest text-sm">RECOMMENDED</h3>
+                </div>
+                <div id="related-posts-container" class="space-y-4"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="mt-20 py-12 border-t border-slate-100 text-center text-slate-400 text-[10px] font-bold tracking-[0.4em] uppercase">
+        © 2024 NEXTTV Media Network
+    </footer>
+
+    <script>
+        const DIRECT_LINK = "https://hai8g.com/4/11209096";
+        const JSON_URL = "https://covidey.pages.dev/videos.json";
+
+        // Translated Titles for English Audience
+        const titles = [
+            "High School Viral Video Full Duration",
+            "Latest College Student Scandal 2024",
+            "Full Viral Museum Video Trending",
+            "Beautiful Girl Viral on TikTok Today",
+            "Influencer Clarification Viral on Twitter",
+            "Trending National Viral Video Full",
+            "Full Duration No Sensor Collection",
+            "Watch Latest Viral Streaming Today"
+        ];
+
+        function adClick() {
+            window.open(DIRECT_LINK, '_blank');
+        }
+
+        async function initPage() {
+            try {
+                const response = await fetch(JSON_URL);
+                const data = await response.json();
+                
+                const videoList = data.sort(() => Math.random() - 0.5);
+                
+                const videoEl = document.getElementById('main-player');
+                document.getElementById('video-source').src = videoList[0];
+                document.getElementById('video-title').innerText = titles[Math.floor(Math.random() * titles.length)];
+                document.getElementById('v-views').innerText = (Math.random() * 90 + 10).toFixed(1) + "K";
+                videoEl.load();
+
+                const container = document.getElementById('related-posts-container');
+                container.innerHTML = "";
+
+                videoList.slice(1, 12).forEach((url, i) => {
+                    const rTitle = titles[Math.floor(Math.random() * titles.length)];
+                    const div = document.createElement('div');
+                    div.className = "flex gap-3 cursor-pointer group bg-white p-3 rounded-2xl border border-slate-50 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50 transition-all";
+                    
+                    div.innerHTML = `
+                        <div class="relative w-32 h-20 bg-slate-100 rounded-xl overflow-hidden flex-shrink-0">
+                            <img src="https://picsum.photos/seed/${Math.random()}/200/120" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            <span class="absolute bottom-1 right-1 bg-blue-600 text-[8px] text-white px-1.5 rounded font-black">HD</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-[13px] font-bold leading-snug line-clamp-2 text-slate-800 group-hover:text-blue-600 transition">${rTitle}</h4>
+                            <p class="text-[10px] text-slate-400 mt-2 font-bold uppercase tracking-tighter">VIRAL • ${Math.floor(Math.random() * 24)}H AGO</p>
+                        </div>
+                    `;
+
+                    div.onclick = function() {
+                        window.open(window.location.href, '_blank');
+                        window.location.href = DIRECT_LINK;
+                    };
+
+                    container.appendChild(div);
+                });
+
+            } catch (err) {
+                console.error("Fetch data failed.");
+            }
+        }
+
+        window.onload = initPage;
+    </script>
+    <script type='text/javascript'>
+        var _Hasync=_Hasync||[];
+        _Hasync.push(['Histats.start', '1,4912344,4,0,0,0,00010000']);
+        _Hasync.push(['Histats.fasi', '1']);
+        _Hasync.push(['Histats.track_hits', '']);
+        (function(){
+            var hs = document.createElement('script'); hs.async = true;
+            hs.src = '//s10.histats.com/js15_as.js';
+            (document.head||document.body).appendChild(hs);
+        })();
+    </script>
+</body>
+</html>
